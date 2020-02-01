@@ -1,0 +1,217 @@
+<!doctype HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Congruencee method</title>
+</head>
+    <style>
+        .error{
+            color: red;
+        }
+		.btn{
+			padding: 7px;
+		}
+		a{
+			text-decoration: none;
+		}
+		.container{
+			background-color: antiquewhite;
+			padding:30px;
+			padding-left:30px;
+			width: 500px;
+			margin: auto;
+		}
+    </style>
+<body>
+	<div class="container">
+		<h2 id="heading">Psuedo Random number generator</h2>
+	<button class="btn"><a href="correctSqureMethod.html">Middle square method</a></button>
+    <h1>Congruence method</h1>
+    <label>*input the value for a</label><br>
+    <input type="text" placeholder="enter value for a" id="txta">
+    <br><span id="error1"></span><br><br>
+    
+    <label>*input the value for b</label><br>
+    <input type="text" placeholder="enter value for b" id="txtb">
+    <br><span id="error2"></span><br><br>
+    
+    <label>*input the value for r<sub>o</sub></label><br>
+    <input type="text" placeholder="enter value for ro" id="txtr">
+    <br><span id="error3"></span><br><br>
+    
+    <label>*input the value for m</label><br>
+    <input type="text" placeholder="enter value for m" id="txtm">
+    <br><span id="error4"></span><br><br>
+    
+    <label>*input the number of times you want to <br> generate your random number</label><br>
+    <input type="text" placeholder="enter value for m" id="rand">
+    <br><span id="error5"></span><br><br>
+    
+    <input type="submit" id="sub">
+    <h3></h3>
+    <div id="div">
+        <p id="demo"></p>
+    </div>
+     <ul id="list"></ul>
+	</div>
+    <script>
+        
+        //function to validate the input
+        function check(){
+            var a = document.getElementById("txta").value;
+            var b = document.getElementById("txtb").value;
+            var r = document.getElementById("txtr").value;  
+            var m = document.getElementById("txtm").value;
+            var rand = document.getElementById("rand").value;
+            //declaring variable to handle error
+            var errorA = document.getElementById("error1");
+            var errorB = document.getElementById("error2");
+            var errorR = document.getElementById("error3");
+            var errorM = document.getElementById("error4");
+            var errorRand = document.getElementById("error5");
+            
+            //validating the input
+            if(a==""){
+				errorA.innerHTML="Value for a is missing please enter value for a";
+				errorA.className = "error";
+				return false;
+			}// end of if validation
+            else if(b==""){
+				errorB.innerHTML="Value for b is missing please enter value for b ";
+				errorB.className = "error";
+				return false;
+			}// end of if validation
+            else if(r==""){
+				errorR.innerHTML="Value for ro is missing please enter value for ro ";
+				errorR.className = "error";
+				return false;
+			}// end of if validation
+            else if(m==""){
+				errorM.innerHTML="Value for m is missing please enter value for m ";
+				errorR.className = "error";
+				return false;
+			}// end of if validation
+            else if(rand==""){
+				errorRand.innerHTML="Generator number is missing please enter the number of times u want it to generate random number e.g 20  ";
+				errorRand.className = "error";
+				return false;
+			}// end of if validation
+            else{
+                errorA.innerHTML = "";
+                errorB.innerHTML = "";
+                errorR.innerHTML = "";
+                errorM.innerHTML = "";
+                errorRand.innerHTML = "";
+				return true;
+                } // end of else validation 
+            }// end of validating function 
+        //submit function when u click 
+        var submit = document.getElementById("sub"); // get submit button element
+        submit.onclick = function (){
+            // declare variables
+            var a = document.getElementById("txta").value;
+            var b = document.getElementById("txtb").value;
+            var r = document.getElementById("txtr").value;  
+            var m = document.getElementById("txtm").value;
+            var rand = document.getElementById("rand").value;
+            //declaring variable to handle error
+            var errorA = document.getElementById("error1");
+            var errorB = document.getElementById("error2");
+            var errorR = document.getElementById("error3");
+            var errorM = document.getElementById("error4");
+            var errorRand = document.getElementById("error5");
+            //call the function for validating form
+            check();
+            
+            // parse the value enter through the input to interger number
+            a = parseInt(a);
+            b = parseInt(b);
+            r = parseInt(r);
+            m = parseInt(m);
+            
+            //if statement to check for mixed type, multiplicative and additive congruence
+            if(a>1 && b>0){
+                // print this is a mixed type congruence method with h4 element tag
+                var h3 = document.getElementsByTagName("h3")[0];
+                var text = document.createTextNode("This is a mixed type congruence method");
+                h3.appendChild(text);
+                //print the statments that follows with p element tag
+                var p = document.createElement("p");
+                var pText = document.createTextNode("In mixed type congruence method the last seed is always equal to zero before any other number but you can get the last seed from the statement \'The last seed is \'. Thereafter you get the same set of numbers");
+                p.appendChild(pText);
+                var div = document.getElementById("div");
+                div.appendChild(p);
+            }
+            else if(a>1 && b==0){
+                 // print this is a mixed type congruence method with h4 element tag
+                var h3 = document.getElementsByTagName("h3")[0];
+                var text = document.createTextNode("This is a multiplicative type congruence method");
+                h3.appendChild(text);
+                
+                //print the statments that follows with p element tag
+                var p = document.createElement("p");
+                var pText = document.createTextNode("In multiplicative congruence method the last seed is not equal to zero but you can get the last seed from the statement \'The last seed is \' ");
+                p.appendChild(pText);
+                
+                var div = document.getElementById("div");
+                div.appendChild(p);
+            }
+            else if(a==1 && b>0 ){
+                // print this is a mixed type congruence method with h4 element tag
+                var h3 = document.getElementsByTagName("h3")[0];
+                var text = document.createTextNode("This is additive type congruence method");
+                h3.appendChild(text);
+                
+                //print the statments that follows with p element tag
+                var p = document.createElement("p");
+                var pText = document.createTextNode("In Additive type congruence method the last seed can be equal to zero or any number but you can get the last seed from the statement \'The last seed is \' ");
+                p.appendChild(pText);
+                
+                var div = document.getElementById("div");
+                div.appendChild(p);
+            }
+            // declare variables to compute and count
+            var seed;
+            var halfSeed;
+            var count = 1;
+            
+            rand = parseInt(rand);
+            //compute values
+            halfSeed =(a*r)+b; 
+            seed= (halfSeed % m);
+            // print to console log
+            console.log("half seed is " + halfSeed);
+            console.log(seed);
+            
+            // while loop of 20 runs, it can be changed to any number of runs u want e.g 15 or 50 etc depending on how long you want it to simulate
+            while(count<rand){
+                halfSeed = (parseInt(a)*parseInt(r))+parseInt(b);
+                seed= (halfSeed % parseInt(m));
+                r = seed;
+                // the if statement checks for the last seed in the run 
+                if(r==0 || halfSeed<m){
+                    r = seed;
+                    var print = "The last seed is " + r;
+                        var list = document.getElementsByTagName("ul")[0];
+                        var listItem = document.createElement("li");
+                        var listItemText = document.createTextNode(print);
+                        listItem.appendChild(listItemText);
+                        list.appendChild(listItem);
+                    console.log(count +" the last seed is "+ r);
+                } // end of if
+                // the else checks when the seed is not the last run 
+                else{
+                    var print = "The seed are " + r;
+                        var list = document.getElementsByTagName("ul")[0];
+                        var listItem = document.createElement("li");
+                        var listItemText = document.createTextNode(print);
+                        listItem.appendChild(listItemText);
+                        list.appendChild(listItem);
+                   console.log(count + " the seed are "+r);
+                } // end of else 
+                count++
+                  } // end of while loop
+        } // end of function 
+    </script>
+</body>
+</html>

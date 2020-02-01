@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Square seed method</title>
+    <style>
+        .error{
+            color: red;
+        }
+        #container{
+            width: 550px;
+            //height: 200px;
+            margin: auto;
+            padding: 30px;
+            background-color: antiquewhite;
+        }
+        input{
+            width: 350px;
+            padding: 10px;
+            margin-left:  60px;
+        }
+        label{
+            margin-left:  60px;
+            font-size: 25px;
+        }
+        #heading{
+            text-align: center;
+        }
+		.btn{
+			padding: 7px;
+		}
+		a{
+			text-decoration: none;
+		}
+    </style>
+</head>
+<body>
+    <div id="container">
+		<h2 id="heading">Psuedo Random number generator</h2>
+		<button class="btn"><a href="correctCongruence.html">Congruence method</a></button>
+		<h3><br>Middle Square method</h3>
+        <label>*enter four digit seed number</label><br>
+        <input type="text" id="seed" placeholder="enter 4 digit numbers" required><br><span id="error1"></span><br><br>
+    
+        <label>*enter number of runs e.g 30</label><br>
+        <input type="text" id="runs" placeholder="enter number of runs" required><br><span id="error2"></span><br>
+        <input type="submit" id="submit"><br><br><br>
+        <h3></h3>
+        <ol></ol>
+        <ul></ul>
+    </div>
+    <script>
+        //function to validate the input 
+        function validate(){
+            var seed = document.getElementById("seed").value;
+            var runs = document.getElementById("runs").value;
+            
+            var error1 = document.getElementById("error1");
+            var error2 = document.getElementById("error2");
+            
+            if(seed==''){
+                error1.innerHTML = "please enter four digit seed number!";
+                error1.className = "error";
+                return false;
+            }//end of if 
+            else if(runs==''){
+                error2.innerHTML = "Pleasse enter the number of runs!";
+                error2.className = "error";
+                return false;
+            } // end of else if 
+            else {
+                error1.innerHTML = "";
+                error2.innerHTML = "";
+                return true;
+            } // end of else 
+        }// end of validate function 
+        var submit = document.getElementById("submit");
+        submit.onclick = function (){
+            validate();// calling validate function here 
+            // variable declaration 
+            var seed = document.getElementById("seed").value;
+            var addZero= ["0","00","000","0000"];
+            var seedNumber;
+            var rand;
+            var nextSeed;
+            var counter = 1;
+            // processing 
+            var seedDigit = seed.length * 2;
+            var squareSeed = seed * seed;
+            var toStringSquareSeed = squareSeed.toString();
+            var convertedSquareSeed = toStringSquareSeed.length;
+            //runs variable 
+            var runs = document.getElementById("runs").value;
+            runs = parseInt(runs);
+            //begining of loop 
+            while(counter<=runs){
+                if(convertedSquareSeed<8){
+                seedNumber = addZero[0] + squareSeed;
+                rand = seedNumber.slice(3,5);
+                nextSeed = seedNumber.slice(2,6);
+                    if(convertedSquareSeed<7){
+                        seedNumber = addZero[1] + squareSeed;
+                        rand = seedNumber.slice(3,5);
+                        nextSeed = seedNumber.slice(2,6);
+                    } //end of innner if
+                    if(convertedSquareSeed<6){
+                        seedNumber = addZero[2] + squareSeed;
+                        rand = seedNumber.slice(3,5);
+                        nextSeed = seedNumber.slice(2,6);
+                    }//end of innner if
+                    if(convertedSquareSeed<5){
+                        seedNumber = addZero[3] + squareSeed;
+                        rand = seedNumber.slice(3,5);
+                        nextSeed = seedNumber.slice(2,6);
+                    }//end of innner if 
+                } // end of if 
+                else{
+                    rand = toStringSquareSeed.slice(3,5)
+                    nextSeed = toStringSquareSeed.slice(2,6);
+                }// end of else
+                rand = parseInt(rand);
+                nextSeed = parseInt(nextSeed);
+                seed = nextSeed;
+                seedDigit = nextSeed * 2;
+                squareSeed = nextSeed * nextSeed;
+                toStringSquareSeed = squareSeed.toString();
+                convertedSquareSeed = toStringSquareSeed.length
+                //this if statement will display if the random numbers has reach decay i.e 10 repeatedly
+                if(rand==10){
+                    console.log("It has reach decay when you state geting only  "+rand + " as random number");
+                    //print decay random numbers 
+                    var printRandDecay =" It has reach decay when you state geting only " + rand + " as random number";
+                    var decay = document.createTextNode(printRandDecay);
+                    var brk = document.createElement("br");
+                    list.appendChild(brk);
+                    list.appendChild(decay);
+                    list.appendChild(span);
+                    ul.appendChild(list);        }
+                //Display output to console
+                console.log(counter+" The random number is  "+ (rand>9 ? rand : "0"+rand));
+                console.log("The next seed is "+ nextSeed); 
+                console.log("  ");
+                // displays output to screen 
+                var printRand ="The random number is "+(rand>9 ? rand : "0"+rand);
+                //print next seed variable 
+                /*var printNextRand = "The next seed is "+ nextSeed;*/
+                //print the listed random numbers 
+                var ul = document.getElementsByTagName("ol")[0];
+                var list = document.createElement("li");
+                //print next seed
+                var span = document.createElement("span");
+                var listItem = document.createTextNode(printRand);
+                list.appendChild(listItem);
+                list.appendChild(span);
+                ul.appendChild(list);
+                counter++;
+                  }//end of loop
+            //print heading for random number to display 
+                var print = "The random numbers are:"
+                var h3 = document.getElementsByTagName("h3")[0];
+                var text = document.createTextNode(print);
+                h3.appendChild(text);
+        }//end of function
+    </script>
+</body>
+</html>
