@@ -52,7 +52,7 @@
     <div id="div">
         <p id="demo"></p>
     </div>
-     <ul id="list"></ul>
+     <ol id="list"></ol>
 	</div>
     <script>
         
@@ -202,7 +202,7 @@
                 // the else checks when the seed is not the last run 
                 else{
                     var print = "The seed are " + r;
-                        var list = document.getElementsByTagName("ul")[0];
+                        var list = document.getElementsByTagName("ol")[0];
                         var listItem = document.createElement("li");
                         var listItemText = document.createTextNode(print);
                         listItem.appendChild(listItemText);
